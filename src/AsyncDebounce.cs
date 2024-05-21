@@ -14,7 +14,11 @@ internal class AsyncDebounce(Func<CancellationToken, Task> invocation, int timeo
 
     public Task FlushAsync()
     {
-        return Task.WhenAll(_invocations.Select(i => i(default)));
+        var task = Task.WhenAll(_invocations.Select(i => i(default)));
+
+        Cancel();
+
+        return task;
     }
 
     public Task InvokeAsync()
@@ -48,6 +52,11 @@ internal class AsyncDebounce(Func<CancellationToken, Task> invocation, int timeo
                     taskCompletionSource.SetResult();
                 }
             }, cancellationToken);
+        }, () =>
+        {
+            _invocations.Remove(invocation);
+
+            taskCompletionSource.SetCanceled();
         });
 
         return taskCompletionSource.Task;

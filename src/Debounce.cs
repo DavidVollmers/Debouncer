@@ -18,7 +18,7 @@ internal class Debounce(Action<CancellationToken> invocation, int timeout) : Deb
             i(default);
         }
 
-        _invocations.Clear();
+        Cancel();
     }
 
     public void Invoke()
@@ -28,11 +28,11 @@ internal class Debounce(Action<CancellationToken> invocation, int timeout) : Deb
         Invoke(cancellationToken =>
         {
             _invocations.Remove(invocation);
-            
+
             if (!cancellationToken.IsCancellationRequested)
             {
                 invocation(cancellationToken);
             }
-        });
+        }, () => _invocations.Remove(invocation));
     }
 }
