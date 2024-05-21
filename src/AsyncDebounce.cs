@@ -16,7 +16,7 @@ internal class AsyncDebounce(Func<CancellationToken, Task> invocation, int timeo
     {
         var task = Task.WhenAll(_invocations.Select(i => i(default)));
 
-        Cancel();
+        Reset();
 
         return task;
     }

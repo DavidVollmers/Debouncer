@@ -19,8 +19,7 @@ internal abstract class DebounceBase(int timeout)
 
     protected void Invoke(Action<CancellationToken> action, Action disposeCallback)
     {
-        _timer?.Dispose();
-        _disposeCallback?.Invoke();
+        Reset();
 
         // Capture the current CancellationToken until the next timeout
         var cancellationToken = _cancellationTokenSource.Token;
@@ -31,5 +30,14 @@ internal abstract class DebounceBase(int timeout)
         _timer.AutoReset = false;
         _timer.Elapsed += (_, _) => { action(cancellationToken); };
         _timer.Start();
+    }
+
+    protected void Reset()
+    {
+        _timer?.Dispose();
+        _disposeCallback?.Invoke();
+        
+        _timer = null;
+        _disposeCallback = null;
     }
 }
