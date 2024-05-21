@@ -56,7 +56,7 @@ internal class AsyncDebounce(Func<CancellationToken, Task> invocation, int timeo
         {
             _invocations.Remove(invocation);
 
-            taskCompletionSource.SetCanceled();
+            if (!taskCompletionSource.Task.IsCompleted) taskCompletionSource.SetCanceled();
         });
 
         return taskCompletionSource.Task;
