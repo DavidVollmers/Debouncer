@@ -12,7 +12,6 @@ internal abstract class DebounceBase(int timeout)
     public virtual void Cancel()
     {
         _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
 
         _cancellationTokenSource = new CancellationTokenSource();
     }
@@ -21,9 +20,12 @@ internal abstract class DebounceBase(int timeout)
     {
         _timer?.Dispose();
 
+        // Capture the current CancellationToken until the next timeout
+        var cancellationToken = _cancellationTokenSource.Token;
+
         _timer = new Timer(Timeout);
         _timer.AutoReset = false;
-        _timer.Elapsed += (_, _) => { action(_cancellationTokenSource.Token); };
+        _timer.Elapsed += (_, _) => { action(cancellationToken); };
         _timer.Start();
     }
 }

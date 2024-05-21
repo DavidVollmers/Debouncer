@@ -28,8 +28,11 @@ internal class Debounce(Action<CancellationToken> invocation, int timeout) : Deb
         Invoke(cancellationToken =>
         {
             _invocations.Remove(invocation);
-
-            invocation(cancellationToken);
+            
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                invocation(cancellationToken);
+            }
         });
     }
 }
