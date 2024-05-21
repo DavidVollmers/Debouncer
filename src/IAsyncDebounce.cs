@@ -4,7 +4,9 @@ public interface IAsyncDebounce
 {
     int Timeout { get; }
     
-    Task FlushAsync(CancellationToken cancellationToken = default);
+    void Cancel();
+    
+    Task FlushAsync();
 
-    Task InvokeAsync(CancellationToken cancellationToken = default);
+    Task InvokeAsync();
 }
