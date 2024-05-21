@@ -1,9 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <PackageId>Debouncer</PackageId>
+        <Authors>david@vollmers.org</Authors>
+        <Copyright>David Vollmers</Copyright>
+        <Description>Debounce your code!</Description>
+        <PackageProjectUrl>https://github.com/DavidVollmers/Debouncer</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>logo-64x64.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/DavidVollmers/Debouncer.git</RepositoryUrl>
         <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>12</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageOutputPath>..\..\nuget</PackageOutputPath>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\LICENSE.txt" Pack="true" PackagePath="\"/>
+        <None Include="..\assets\logo-64x64.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
 </Project>
