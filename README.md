@@ -1,3 +1,7 @@
+[![](https://img.shields.io/github/v/release/DavidVollmers/Debouncer)](https://github.com/DavidVollmers/Debouncer/releases)
+[![](https://img.shields.io/nuget/dt/Debouncer)](https://www.nuget.org/packages/Debouncer)
+[![](https://img.shields.io/github/license/DavidVollmers/Debouncer)](https://github.com/DavidVollmers/Debouncer/blob/master/LICENSE.txt)
+
 # Debouncer
 
 > Debounce your code!
