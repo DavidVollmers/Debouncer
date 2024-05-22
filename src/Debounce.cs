@@ -19,6 +19,8 @@ internal class Debounce(Action<CancellationToken> invocation, int timeout) : Deb
         }
 
         Reset();
+
+        _invocations.Clear();
     }
 
     public void Invoke()
