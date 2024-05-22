@@ -18,6 +18,8 @@ internal class AsyncDebounce(Func<CancellationToken, Task> invocation, int timeo
 
         Reset();
 
+        _invocations.Clear();
+
         return task;
     }
 
